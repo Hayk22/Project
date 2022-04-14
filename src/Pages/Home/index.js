@@ -30,8 +30,10 @@ function Home() {
             render: (_, record) => <Link to={`accounts/${record.Id}`}>View</Link>,
         },
     ]
+
     const user = useContext(UserContext);
 
+    console.log(user);
     return (
         <Table columns={columns} dataSource={user} rowKey={(row) => row.Id} />
     );
