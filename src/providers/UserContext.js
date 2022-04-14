@@ -1,30 +1,22 @@
+
+import React, { useEffect, useState } from 'react'
 import { createContext } from 'react';
+import axios from 'axios';
 export const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
-    const data = [
-        {
-            Id: '1',
-            name: 'Account 1',
-            CreatedOn: '5-8-2021',
-            UpdatedOn: '5-8-2021'
-        },
-        {
-            Id: '2',
-            name: 'Account 2',
-            CreatedOn: '5-8-2021',
-            UpdatedOn: '5-8-2021'
-        },
-        {
-            Id: '3',
-            name: 'Account 3',
-            CreatedOn: '5-8-2021',
-            UpdatedOn: '5-8-2021'
-        },
-    ]
 
+    const [date, setDates] = useState([])
+    useEffect(() => {
+        axios
+            .get('https://mockend.com/rawmediamarketing/vue-assignment-api/accounts')
+            .then(
+                (response) => (setDates(response.data))
+            )
+            .catch(e => console.log('info'))
+    }, [])
     return (
-        <UserContext.Provider value={data}>
+        <UserContext.Provider value={date}>
             {children}
         </UserContext.Provider>
     )
